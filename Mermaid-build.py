@@ -30,7 +30,7 @@ class MermaidBuildCommand(sublime_plugin.WindowCommand):
     self.init_panel()
     settings = sublime.load_settings('mermaid.sublime-settings')
 
-    # TODO how to get this to work
+    # TODO how to get this to work and utilise quiet flag
     # show_panel_on_build = settings.get("show_panel_on_build", True)
     # if show_panel_on_build:
     #     self.window.run_command("show_panel", {"panel": "output.mermaid"})
@@ -66,27 +66,36 @@ class MermaidBuildCommand(sublime_plugin.WindowCommand):
 
     print("running mmdc with flags: " + str(flattened_flags))
     # run mmdc
-    # TODO handle windows
+    # TODO handle Windows
     p = subprocess.Popen(flattened_flags, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     # stream stdout and stderr
+    handle_popen(p)
+
+    print("mmdc has finished generating. Rendered Mermaid is at "+outputFile)
+
+    will_open = settings.get('open_in_default_app_after_build', False)
+    if will_open:
+      if sys.platform == 'darwin':
+          opener = "open"
+      elif sys.platform == 'linux':
+          opener += "xdg-open"
+      elif sys.platform == 'win32':
+          opener = "Invoke-Item"
+      # debug
+      print("opening in "+str([opener, outputFile]))
+      p = subprocess.Popen([opener, outputFile])
+      handle_popen(p)
+
+  def handle_popen(handler):
     while True:
-      output = p.stdout.readline()
+      output = handler.stdout.readline()
       if not output:
-        err = p.stderr.readline()
+        err = handler.stderr.readline()
         if not err:
           break
         else:
           print(err.rstrip(), flush=True)
       else:
         print(output.rstrip(), flush=True)
-
-    print("mmdc has finished generating. Rendered Mermaid is at "+outputFile)
-
-    will_open = settings.get('open_in_default_app_after_build', False)
-    # TODO get list of opener handlers
-    if will_open:
-      print("opening in "+str(['xdg-open', outputFile]))
-      subprocess.Popen(['xdg-open', outputFile])
-
 

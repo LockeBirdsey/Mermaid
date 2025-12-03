@@ -34,7 +34,8 @@ class MermaidBuildCommand(sublime_plugin.WindowCommand):
     # show_panel_on_build = settings.get("show_panel_on_build", True)
     # if show_panel_on_build:
     #     self.window.run_command("show_panel", {"panel": "output.mermaid"})
-
+    
+    mmdc_cmd = settings.get('mmdc_location',"mmdc")
     build_settings = settings.get('build')
     # remove unused settings
     pruned_build_settings = {k: v for k, v in build_settings.items() if v}
@@ -60,7 +61,7 @@ class MermaidBuildCommand(sublime_plugin.WindowCommand):
     flags = [['--'+k, str(v)] for k, v in pruned_build_settings.items()]
     print(flags)
 
-    flattened_flags = ["mmdc"] + [x for i in flags for x in i]
+    flattened_flags = [mmdc_cmd] + [x for i in flags for x in i]
     if outputFormat.lower() == 'pdf' and pdfFit:
       flattened_flags += ["--pdfFit"]
 

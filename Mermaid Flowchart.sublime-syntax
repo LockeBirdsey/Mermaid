@@ -16,6 +16,9 @@ contexts:
       scope: punctuation.terminator.flowchart
 
   main:
+    - match: ^---$
+      scope: punctuation.section.block.begin.graph.mermaid
+      push: config
     - include: style
     - match: ^\s*(click)\s+
       captures:
@@ -242,14 +245,16 @@ contexts:
       captures:
         1: keyword.declaration.styling.graph.mermaid
         2: entity.name.constant.styling.graph.mermaid
-      embed: scope:source.css.mermaid#property-list-body
+      embed: scope:source.css.mermaid#rule-list-body
+      embed_scope: source.css.embedded
       escape: $
 
-    - match: ^\s*(style)\s+({{entity}})\s+
+    - match: ^\s*(style|linkStyle)\s+({{entity}})\s+
       captures:
         1: keyword.declaration.styling.graph.mermaid
         2: variable.parameter.graph.mermaid
-      embed: scope:source.css.mermaid#property-list-content
+      embed: scope:source.css.mermaid#rule-list-body
+      embed_scope: source.css.embedded
       escape: $
 
   class-expect-node-name:
@@ -289,3 +294,9 @@ contexts:
       escape_captures:
         0: punctuation.definition.string.end.mermaid
       #pop: 1
+
+  config:
+    - match: ^---$
+      scope: punctuation.section.block.end.graph.mermaid
+      pop: 1
+    - include: scope:source.yaml

@@ -310,6 +310,15 @@ flowchart LR
     click A call callback() "Tooltip for a callback"
     click B href "https://www.github.com" "This is a tooltip for a link"
 
+---
+config:
+  markdownAutoWrap: false
+%%^^^^^^^^^^^^^^^^ meta.mapping.key meta.string string.unquoted
+%%                ^ meta.mapping punctuation.separator.key-value.mapping
+%%                  ^^^^^ constant.language.boolean.false
+---
+%%^ source.mermaid.flowchart punctuation.section.block.end.graph.mermaid
+
 flowchart LR
     A-->B
     B-->C
@@ -319,3 +328,18 @@ flowchart LR
     click B "https://www.github.com" "Open this top" _top
     click C href "https://www.github.com" _parent
     click D href "https://www.github.com" "Open this in a new tab" _blank
+
+    linkStyle 0 stroke:#BBDEFB,fill:none
+%%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.mermaid.flowchart
+%%  ^^^^^^^^^ keyword.declaration.styling.graph.mermaid
+%%            ^ variable.parameter.graph.mermaid
+%%              ^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded
+%%              ^^^^^^ meta.property-name.css support.type.property-name.css
+%%                    ^ punctuation.separator.key-value.css
+%%                     ^^^^^^^ meta.property-value.css constant.other.color.rgb-value.css
+%%                     ^ punctuation.definition.constant.css
+%%                            ^ punctuation.terminator.rule.css.mermaid
+%%                             ^^^^ meta.property-name.css support.type.property-name.css
+%%                                 ^ punctuation.separator.key-value.css
+%%                                  ^^^^ meta.property-value.css constant.language.null.css
+%%                                      ^ - source.css

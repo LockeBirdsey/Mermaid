@@ -8,7 +8,8 @@
   // The theme to use for view-in-browser.
   // Available: dark, default, forest, neutral.
   "theme": "neutral",
-
+  // Location of the mermaid-cli executable. If let blank it will check the PATH
+  "mmdc-location": "",
   "build":{
     // The location where the rendered Mermaid diagram will be generated
     // If left blank, it will be the same directory as the Mermaid file

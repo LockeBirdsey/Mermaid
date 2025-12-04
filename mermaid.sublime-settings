@@ -5,18 +5,15 @@
   // Whether to dim links to reduce noise,
   // for certain graphs with more links.
   "quiet_graph_links": false,
-  // The theme to use for view-in-browser.
-  // Available: dark, default, forest, neutral.
-  "theme": "neutral",
-  // Location of the mermaid-cli executable. If let blank it will check the PATH
-  "mmdc-location": "",
+  // Absolute location of the mermaid-cli executable. If let blank it will check the PATH
+  "mmdc-location": "/usr/bin/mmdc",
   "build":{
     // The location where the rendered Mermaid diagram will be generated
     // If left blank, it will be the same directory as the Mermaid file
     "output": "",
     // The format of the rendered Mermaid diagram
     // Overrides the file extension used in `output`. Options are: 'svg', 'png', 'pdf'
-    "outputFormat": "svg",
+    "outputFormat": "png",
     // The width of the page (mmdc defaults to 800)
     "width": 2048,
     // The height of the page (mmdc defaults to 600)
@@ -26,7 +23,7 @@
     // The background color for PNGs and SVGs. Accepts CSS color names or hex values
     "backgroundColor": "transparent",
     // Theme of the chart. Options are 'default', 'forest', 'dark', 'neutral'
-    "theme": "default",
+    "theme": "forest",
     // The CSS file to use when rendering the Mermaid diagram
     "cssFile": "",
     // Scale the PDF to fit the chart (if using PDF output)
